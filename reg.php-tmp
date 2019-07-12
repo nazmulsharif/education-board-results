@@ -1,0 +1,107 @@
+<?php
+include_once ("inc/connection.php");
+if (isset($_POST['submit'])) {
+	$name    = $_POST['name'];
+	$email   = $_POST['email'];
+	$imgname = $_FILES['img']['name'];
+	$imga    = explode('.', $imgname);
+	$ext     = end($imga);
+	$imgt    = $_FILES['img']['tmp_name'];
+	$img     = md5(time().$_FILES['img']['name']).".".$ext;
+	$pass    = $_POST['pass'];
+	$conpass = $_POST['conpass'];
+	if (empty($name)) {
+		$nameError = "name is not empty";
+	} else if (empty($email)) {
+		$emailError = "email is not empty";
+	} else if (empty($img)) {
+		$imgError = "image is not empty";
+	} else if (empty($pass)) {
+		$passError = "password is not empty";
+	} else if (empty($conpass)) {
+		$conpassError = "confirm password";
+	} else if ($pass != $conpass) {
+		echo "password does not match";
+	} else if ((in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) == false) {
+		echo "invalid image";
+	} else {
+
+		$conn->query("INSERT into reg1(name,email,img,pass)VALUES('$name','$email','$img','$pass')");
+		move_uploaded_file($imgt, "images/".$img);
+	}
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Education Board Results</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="login w-50 m-auto alert alert-dark">
+			<h2 class="text-center">Registration here</h2>
+			<form action="" enctype="multipart/form-data" method="post">
+				<div class="form-group">
+					<label for="Name">Enter your Name</label>
+					<input type="name" id="name" class="form-control" name="name">
+<?php
+if (isset($nameError)) {
+	echo "<h2 class='alert-danger alert'>".$nameError."</h2>";
+}
+?>
+</div>
+				<div class="form-group">
+					<label for="email">Enter your Email</label>
+					<input type="email" id="email" class="form-control" name="email">
+<?php
+if (isset($emailError)) {
+	echo "<h2 class='alert-danger alert'>".$emailError."</h2>";
+}
+?>
+</div>
+				<div class="form-group">
+					<label for="img">Enter your image</label>
+					<input type="file" id="img" class="form-control" name ="img">
+<?php
+if (isset($imgError)) {
+	echo "<h2 class='alert-danger alert'>".$imgError."</h2>";
+}
+?>
+</div>
+				<div class="form-group">
+					<label for="pass">Enter Password</label>
+					<input type="password" id="pass" class="form-control" name="pass">
+<?php
+if (isset($passError)) {
+	echo "<h2 class='alert-danger alert'>".$passError."</h2>";
+}
+?>
+</div>
+				<div class="form-group">
+					<label for="pass">Confirm Password</label>
+					<input type="password" id="pass" class="form-control" name ="conpass">
+<?php
+if (isset($conpassError)) {
+	echo "<h2 class='alert-danger alert'>".$conpassError."</h2>";
+}
+?>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-success" value ="submit" name="submit">
+				</div>
+			</form>
+			<a href="index.php">Login</a>
+		</div>
+	</div>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+
+	</script>
+
+</body>
+</html>

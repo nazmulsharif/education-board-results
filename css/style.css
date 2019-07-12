@@ -1,0 +1,35 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.header{
+	background: #ddd;
+	padding: 20px;
+	position: relative;
+}
+.header ul{
+	list-style: none;
+}
+.header ul li{
+	display: inline-block;
+	
+	padding: 0px 20px;
+}
+.header ul li img{
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	position: absolute;
+	top: 0px;
+	right: 0;
+
+}
+.data_insert{
+	width: 500px;
+	margin: 50px auto;
+}
+label{
+	font-weight: bold;
+	font-size: 20px;
+}
+

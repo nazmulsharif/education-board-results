@@ -1,0 +1,23 @@
+.table_start{
+	width: 100%;
+	background-color: #EEEEEE;
+}
+table{
+	width: 100%;
+
+}
+.table_start table,tr{
+	border: 2px solid #fff;
+}
+.table_start{
+	width: 100%;
+}
+.table_end th{
+	background-color:#AFB7BE;
+}
+.table_end tr:nth-child(even){
+	background-color: #DEE1E4;
+}
+.table_end tr:nth-child(odd){
+	background-color: #EEEEEE;
+}
